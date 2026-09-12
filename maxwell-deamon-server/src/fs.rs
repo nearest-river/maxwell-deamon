@@ -3,7 +3,6 @@ use crate::case::BareCase;
 
 use std::{
   sync::Arc,
-  ffi::OsStr,
   path::{
     Path,
     PathBuf,
