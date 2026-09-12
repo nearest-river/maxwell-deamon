@@ -1,0 +1,32 @@
+[package]
+name = "maxwell-deamon"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aes = { version = "0.9.3", features = ["zeroize"] }
+aes-gcm = { version = "0.11.1", features = ["arrayvec", "bytes", "zeroize"] }
+anyhow = "1.0.104"
+argon2 = { version = "0.6.0", features = ["parallel", "zeroize"] }
+axum = "0.8.9"
+base64 = "0.23.1"
+chrono = "0.4.45"
+ed25519-dalek = "3.0.0"
+git2 = { version = "0.21.0", features = ["ssh", "openssl-sys"] }
+gix = "0.87.1"
+rand = "0.10.2"
+rand_core = "0.10.1"
+rustix = { version = "1.1.4", features = ["fs"] }
+serde = { version = "1.0.229", features = ["derive"] }
+sha2 = { version = "0.11.0", features = ["zeroize"] }
+subtle = "2.6.1"
+thiserror = "2.0.20"
+tokio = { version = "1.53.1", features = ["full", "io-uring", "tracing"] }
+tokio-uring = { version = "0.5.0", features = ["bytes"] }
+tracing = { version = "0.1.44", features = ["async-await", "log"] }
+tracing-subscriber = "0.3.23"
+uuid = { version = "1.26.0", features = ["v4"] }
+zeroize = { version = "1.9.0", features = ["derive", "simd"] }
+
+
+
