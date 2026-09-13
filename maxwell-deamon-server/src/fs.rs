@@ -2,7 +2,6 @@
 use crate::case::BareCase;
 
 use std::{
-  sync::Arc,
   path::{
     Path,
     PathBuf,
@@ -40,23 +39,23 @@ impl FileSystem {
     })
   }
 
-  pub async fn open_case(self: Arc<Self>,path: impl Into<PathBuf>)-> anyhow::Result<BareCase> {
+  pub async fn open_case(&self,path: impl Into<PathBuf>)-> anyhow::Result<BareCase<'_>> {
     let path=path.into();
     let repo=task::spawn_blocking(move || gix::open(path)).await??;
 
     Ok(BareCase {
       repo,
-      fs: Arc::clone(&self),
+      fs: self,
     })
   }
 
-  pub async fn init_case(self: Arc<Self>,path: impl Into<PathBuf>)-> anyhow::Result<BareCase> {
+  pub async fn init_case(&self,path: impl Into<PathBuf>)-> anyhow::Result<BareCase<'_>> {
     let path=path.into();
     let repo=task::spawn_blocking(move || gix::init(path)).await??;
 
     Ok(BareCase {
       repo,
-      fs: Arc::clone(&self),
+      fs: self,
     })
   }
 

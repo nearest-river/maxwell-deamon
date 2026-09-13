@@ -2,21 +2,18 @@
 
 use tokio::io;
 use gix::Repository;
+use std::path::Path;
 use crate::fs::FileSystem;
 
-use std::{
-  sync::Arc,
-  path::Path,
-};
 
 
-pub struct BareCase {
+pub struct BareCase<'a> {
   pub(crate) repo: Repository,
-  pub(crate) fs: Arc<FileSystem>,
+  pub(crate) fs: &'a FileSystem,
 }
 
 
-impl BareCase {
+impl BareCase<'_> {
   pub async fn read_file(&self,filepath: impl AsRef<Path>)-> io::Result<Vec<u8>> {
     let fullpath=self.repo.path()
     .join(filepath.as_ref());
