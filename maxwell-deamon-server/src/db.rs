@@ -5,7 +5,7 @@ use email_address::EmailAddress;
 
 use crate::{
   user::User,
-  verify::VerificationError,
+  auth::VerificationError,
 };
 
 

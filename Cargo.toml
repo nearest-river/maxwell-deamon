@@ -2,8 +2,8 @@
 
 [workspace]
 resolver = "3"
-members = ["maxwell-deamon-serde",
-  "maxwell-deamon-server"
+members = [
+  "maxwell-deamon-server",
 ]
 
 

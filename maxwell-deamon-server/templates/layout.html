@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="maxwell deamon — Secure document management for legal and professional teams."/>
+    <link rel="stylesheet" href="layout.css">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <title>{% block title %}Default Title{% endblock %}</title>
+</head>
+<body>
+  <main>
+    <div className="app-layout">
+
+      {# =========================================
+          MOBILE OVERLAY
+      ========================================== #}
+
+      {#
+        TODO(nate):
+        mobileMenuOpen && (<button type="button" className="sidebar-overlay" aria-label="Close navigation" onClick={() => setMobileMenuOpen(false)}/>)
+      #}
+
+      {# =========================================
+          SIDEBAR
+      ========================================== #}
+
+      {# ${mobileMenuOpen ? "app-sidebar--open" : ""} #}
+      <aside className={`app-sidebar `} >
+        <div className="sidebar-inner">
+
+          {# Brand #}
+
+          <div className="sidebar-brand">
+
+            <Link to="/dashboard" className="brand-link">
+              <span className="brand-icon">
+                <ShieldCheck size={20} strokeWidth={2.1} />
+              </span>
+
+              <span className="brand-name">
+                Vault<span>Desk</span>
+              </span>
+            </Link>
+
+            <button type="button" className="mobile-close-button" aria-label="Close navigation" {# onClick={() => setMobileMenuOpen(false)} #}>
+              <X size={19} />
+            </button>
+          </div>
+
+
+          {# Workspace #}
+
+          <div className="workspace-switcher">
+
+            <div className="workspace-icon">
+              <Scale size={17} />
+            </div>
+
+            <div className="workspace-details">
+              <span>Workspace</span>
+              <strong>Legal Office</strong>
+            </div>
+
+            <ChevronRight size={15} />
+
+          </div>
+
+
+          {# Navigation #}
+
+          <nav className="sidebar-navigation" aria-label="Main navigation">
+
+            <span className="navigation-label">
+              Workspace
+            </span>
+
+            <div className="navigation-list">
+              {#
+                navigationItems.map((item) => {
+                  const Icon = item.icon;
+                  
+                  return (
+                    <NavLink key={item.path} to={item.path} className={ ({ isActive })=> `sidebar-link ${isActive ? "sidebar-link--active" : ""}` }>
+                      <Icon size={17} strokeWidth={1.9} />
+                      <span>{item.label}</span>
+                      <ChevronRight size={14} className="sidebar-link-arrow" />
+                    </NavLink>
+                  );
+                })
+
+              #}
+            </div>
+
+          </nav>
+
+
+          {# Security status #}
+
+          <div className="security-status">
+
+            <div className="security-status-icon">
+              <ShieldCheck size={16} />
+            </div>
+
+            <div>
+              <strong>Workspace protected</strong>
+              <span>Security controls active</span>
+            </div>
+
+          </div>
+
+
+          {# User section #}
+
+          <div className="sidebar-user">
+
+            <div className="sidebar-user-avatar">
+              LC
+            </div>
+
+            <div className="sidebar-user-info">
+              <strong>Legal Counsel</strong>
+              <span>Lawyer</span>
+            </div>
+
+            <button
+              type="button"
+              className="sidebar-logout"
+              onClick={handleLogout}
+              aria-label="Sign out"
+              title="Sign out"
+            >
+              <LogOut size={16} />
+            </button>
+
+          </div>
+
+        </div>
+      </aside>
+
+
+      {# =========================================
+          MAIN AREA
+      ========================================== #}
+
+      <div className="app-main">
+
+        {# Header #}
+
+        <header className="app-header">
+
+          <div className="header-left">
+
+            <button
+              type="button"
+              className="mobile-menu-button"
+              aria-label="Open navigation"
+              {# onClick={() => setMobileMenuOpen(true)} #}
+            >
+              <Menu size={21} />
+            </button>
+
+            <div className="page-heading">
+              <span className="page-breadcrumb">
+                VaultDesk
+              </span>
+
+              <div className="page-title-row">
+                <!-- <h1>{currentPage.title}</h1> -->
+
+                <span className="breadcrumb-divider">
+                  /
+                </span>
+
+                <span className="page-context">
+                  <!-- {currentPage.subtitle} -->
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+
+          {# Header right #}
+
+          <div className="header-right">
+
+            <div className="header-user">
+
+              <div className="header-user-avatar">
+                LC
+              </div>
+
+              <div className="header-user-text">
+                <strong>Legal Counsel</strong>
+                <span>Lawyer</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </header>
+
+
+        {# Page content #}
+
+        <main className="app-content">
+          {% block main %}
+          {% endblock %}
+        </main>
+
+      </div>
+
+    </div>
+
+  </main>
+</body>
+</html>
