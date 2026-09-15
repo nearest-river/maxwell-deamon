@@ -1,5 +1,5 @@
 
-mod routes;
+mod router;
 
 use std::env;
 use sqlx::PgPool;
@@ -11,14 +11,6 @@ use tokio::net::TcpListener;
 use maxwell_deamon_server::{
   db::DatabasePool,
   email::EmailHandler,
-};
-
-use axum::{
-  Router,
-  routing::{
-    get,
-    post,
-  },
 };
 
 
@@ -34,18 +26,11 @@ pub static BASE_URL: &str="http://127.0.0.1:3000";
 #[tokio::main]
 async fn main()-> anyhow::Result<()> {
   let state=AppState::init().await?;
+  let router=router::router(state);
 
-  let router=Router::new()
-  .route("/",get(routes::home))
-  .route("/hello",get(routes::hello))
-  .route("/sign_up",post(routes::sign_up))
-  .route("/verify",get(routes::verify))
-  .route("/login",get(routes::login))
-  .with_state(state);
 
   let listener=TcpListener::bind(BASE_ADDR).await?;
   info!("listening on http://{}",listener.local_addr()?);
-
 
   axum::serve(listener,router).await?;
   Ok(())

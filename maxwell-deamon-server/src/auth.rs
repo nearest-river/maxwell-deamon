@@ -1,10 +1,4 @@
 
-use rand::Rng;
-
-use sha2::{
-  Digest,
-  Sha256,
-};
 
 use axum::{
   http::StatusCode,
@@ -53,23 +47,5 @@ impl IntoResponse for VerificationError {
     }
   }
 }
-
-
-
-
-pub fn generate_verification_token()-> (String,Vec<u8>) {
-  let mut bytes=[0u8;32];
-
-  rand::rng()
-  .fill_bytes(&mut bytes);
-
-  let token=hex::encode(bytes);
-
-  let hash=Sha256::digest(bytes);
-
-  (token,hash.to_vec())
-}
-
-
 
 

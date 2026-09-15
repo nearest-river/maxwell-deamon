@@ -1,5 +1,4 @@
 
-pub use askama::Template;
 
 pub use crate::{
   BASE_URL,
@@ -8,14 +7,10 @@ pub use crate::{
 
 pub use axum::{
   body::Bytes,
+  response::IntoResponse,
   extract::{
     Query,
     State,
-  },
-  response::{
-    Html,
-    Redirect,
-    IntoResponse,
   },
 };
 
