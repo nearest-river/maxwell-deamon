@@ -5,9 +5,17 @@ edition = "2024"
 
 
 [dependencies]
-bevy = { version = "0.19.1", features = ["dynamic_linking"] }
+anyhow = "1.0.104"
+csv = "1.4.0"
+env_logger = "0.11.11"
 glam = "0.33.7"
 log = { version = "0.4.34", features = ["max_level_debug", "release_max_level_warn"] }
+ndarray = { version = "0.17.2", features = ["rayon"] }
+polars = { version = "0.55.2", features = ["lazy"] }
+rayon = "1.12.0"
+serde = { version = "1.0.229", features = ["derive"] }
+smartcore = "0.6.14"
+thiserror = "2.0.20"
 
 # Enable a small amount of optimization in the dev profile.
 [profile.dev]
